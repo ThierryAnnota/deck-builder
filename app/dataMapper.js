@@ -13,6 +13,14 @@ const dataMapper = {
     };
     const result = await database.query(query);
     return result.rows[0];
+  },
+  async getCardsByElement(element) {
+    const query = {
+      text: 'SELECT * FROM card WHERE element = $1',
+      values: [element]
+    };
+    const result = await database.query(query);
+    return result.rows;
   }
 };
 
