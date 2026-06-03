@@ -5,6 +5,14 @@ const dataMapper = {
     const query = "SELECT * FROM card";
     const result = await database.query(query);
     return result.rows;
+  },
+  async getOneCard(id) {
+    const query = {
+      text : 'SELECT * FROM card WHERE id = $1',
+      values: [id]
+    };
+    const result = await database.query(query);
+    return result.rows[0];
   }
 };
 
