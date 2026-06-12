@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 const express = require('express');
 dotenv.config();
+const session = require('express-session');
 
 const router = require('./app/router');
 
@@ -10,6 +11,17 @@ app.set('view engine', 'ejs');
 app.set('views', 'app/views');
 
 app.use(express.static('public'));
+
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: true, 
+  saveUninitialized: true, 
+  cookie: {
+    secure: false,
+    maxAge: (1000*60*60)
+  }
+}))
 
 app.use(router);
 
